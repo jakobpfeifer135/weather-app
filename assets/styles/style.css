@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styles */
+header {
+    background-color: #2196F3;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1.navbar-brand {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Navigation styles */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar a.nav-link {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Search input styles */
+#search-btn {
+    text-align: center;
+}
+
+.input-group {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.btn-primary {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.btn-primary:hover {
+    background-color: #0E76A8;
+    border-color: #0E76A8;
+}
+
+/* Previous Cities section styles */
+#previous-cities {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Weather card styles */
+.card {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+/* Forecast card styles */
+#forecast .card {
+    margin-bottom: 10px;
+}
+
+/* Today's Weather Display styles */
+#today-display {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    #search-btn .input-group {
+        max-width: 100%;
+    }
+}
