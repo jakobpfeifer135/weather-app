@@ -26,18 +26,18 @@
     </header>
 
     <main class="container mt-4">
-        <section id="search-btn">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter a location..." aria-label="Location" aria-describedby="button-addon2">
-                <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
-            </div>
+        <section id="search-bar">
+            <form id="search-form">
+                <input type="text" id="city-input" name="city" placeholder="Enter a city name" />
+                <button type="submit">Search</button>
+            </form>
         </section>
 
         <article id="current-city" class="row">
             <div class="col-lg-6 mb-4">
                 <!-- Weather information for the current city -->
             </div>
-            <div class="col-lg-3 mb-4">
+            <div class="col-lg-3 mb-4" id="History">
                 <!-- History section with links -->
             </div>
             <div class="col-lg-3 mb-4">
@@ -45,7 +45,8 @@
             </div>
         </article>
     </main>
-
+   
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>

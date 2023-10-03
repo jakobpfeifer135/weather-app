@@ -1,8 +1,27 @@
-var city;
-var APIKey = "184e02df0f0a7ee566582a1603acf7a6";
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
-fetch(queryURL)
+var APIKey = "184e02df0f0a7ee566582a1603acf7a6";
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + inputField + "&appid=" + APIKey;
+var searchBar = document.querySelector("#search-form");
+
+var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
+
+searchCity.addEventListener('click', function(event) {
+    event.preventDefault();
+    var searchBar = document.querySelector('#search-input').value ?? '';
+    
+    // variable for api needs to be in search bar
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}')
+    .then(function (data) {
+       var weatherInfo = data.json();
+       weatherInfo.then(res => {
+        var main = res;
+        console.log(res)
+       })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+});
 
 
 //TODO MAJOR IMPLEMENTATIONS....
@@ -36,3 +55,10 @@ fetch(queryURL)
 //~ add a dayjs into code to allow for time and date to be applied to the page use an interval to update in real time
 
 //~  connect my current city box to match the selected city
+
+
+
+// Create an HTML form with an input field and a submit button.
+// Use JavaScript to handle form submission and retrieve the user's input.
+// Store the user's input in local storage.
+// Append the user's input (city name) to the history section on the page.
