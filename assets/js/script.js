@@ -1,27 +1,89 @@
 
-var APIKey = "184e02df0f0a7ee566582a1603acf7a6";
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + inputField + "&appid=" + APIKey;
+var APIKey = "f30dc0b71f772a037a522282770190be";
 var searchBar = document.querySelector("#search-form");
+var cityInput = document.querySelector("#city-input")
+var cityContainer = document.querySelector("#cityContainer")
+var forecast = document.querySelector("#forecast")
+var today = dayjs().format("MM/DD/YYYY")
 
-var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
-
-searchCity.addEventListener('click', function(event) {
+searchBar.addEventListener("submit", function (event) {
     event.preventDefault();
-    var searchBar = document.querySelector('#search-input').value ?? '';
-    
-    // variable for api needs to be in search bar
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}')
-    .then(function (data) {
-       var weatherInfo = data.json();
-       weatherInfo.then(res => {
-        var main = res;
-        console.log(res)
-       })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // var inputField = searchBar.querySelector("input[type='text']");
+    // var city;
+    // Update the queryURL with the user's input
+
+    var cityValue = cityInput.value
+    fetchCityData(cityValue)
 });
+
+
+function fetchCityData(city) {
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
+    cityContainer.innerHTML = "";
+    forecast.innerHTML = "";
+    // Fetch the weather data for the user's input city
+    fetch(queryURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            var nameOfCity = document.createElement("h2");
+            var wind = document.createElement("h2");
+            var humidity = document.createElement("h2");
+            var temperature = document.createElement("h2");
+            var valueIcon = data.weather[0].icon;
+            var icon = "http://openweathermap.org/img/wn/" + valueIcon + ".png";
+            var lat = data.coord.lat;
+            var lon = data.coord.lon;
+
+            nameOfCity.textContent = data.name;
+            cityContainer.append(nameOfCity)
+            wind.textContent = data.wind.speed;
+            cityContainer.append(wind)
+            humidity.textContent = data.main.humidity;
+            cityContainer.append(humidity)
+            temperature.textContent = data.main.temp;
+            cityContainer.append(temperature)
+            var cityIcon = document.createElement("img")
+            cityIcon.setAttribute("src", icon)
+            cityContainer.append(cityIcon)
+            //cityIcon.classlist.add("")
+
+            // Handle the weather data here, for example:
+            var fiveDayUrl= "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&appid=" + APIKey + "&units=imperial";
+            // var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
+            
+
+            fetch(fiveDayUrl)
+            .then(function(response){
+                return response.json()
+            })
+            .then (function(forecastData){
+                console.log(forecastData);
+                for (var i = 0; i < 6; i++){
+                    var fiveDayForecastDate = document.createElement("h3")
+                    fiveDayForecastDate.textContent = dayjs().add(i,"days").format("DD/MM/YYYY")
+                    forecast.append(fiveDayForecastDate);
+                    var fiveDayTemp = document.createElement("h3")
+                    fiveDayTemp = ;
+
+                }
+            })
+
+
+
+
+
+
+
+            console.log("Weather data for " + city + ":");
+            console.log(data);
+        })
+        .catch(function (error) {
+            console.log("An error occurred while fetching weather data: " + error);
+        });
+}
 
 
 //TODO MAJOR IMPLEMENTATIONS....
@@ -34,7 +96,7 @@ searchCity.addEventListener('click', function(event) {
 
 //TODO when we search for a city it displays: the cities name, the date, a corresponding icon for the weather, the temperature, wind speeds and humidity for the respective city
 
-//TODO when our city has been selected display a 5 day forecast 
+//TODO when our city has been selected display a 5 day forecast
 
 //TODO when i click on each city saved in my history section it will display that cities information instead
 
