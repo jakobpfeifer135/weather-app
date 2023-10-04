@@ -24,7 +24,7 @@ how to utilize api's and use concatenation to pull minute details from the array
 ## Installation
 
 follow my git repo link in the html or deployed link to access the rest of my work both future and past.
-
+https://jakobpfeifer135.github.io/weather-app/
 
 
 ## Usage
