@@ -83,8 +83,9 @@ h1.navbar-brand {
 }
 
 /* Forecast card styles */
-#forecast .card {
+#forecast .card{
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
 /* Today's Weather Display styles */
@@ -118,8 +119,12 @@ h1.navbar-brand {
     border-radius: 7px;
 }
 
-
-
+@media (min-width: 992px) {
+.card.col-lg-2 {
+    flex: 0 0 auto;
+    width: auto;
+}
+}
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .container {
