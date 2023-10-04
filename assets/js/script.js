@@ -110,5 +110,49 @@ function fetchCityData(city) {
             "An error occurred while fetching weather data: " + error
           );
         });
+        function saveCityToLocalStorage(city) {
+            // Get the current list of saved cities from local storage
+            var savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
+            
+            // Check if the city is not already in the list before adding it
+            if (!savedCities.includes(city)) {
+                savedCities.push(city);
+            }
+        
+            // Save the updated list back to local storage
+            localStorage.setItem("savedCities", JSON.stringify(savedCities));
+
+        }
+        searchBar.addEventListener("submit", function (event) {
+            event.preventDefault();
+        
+            var cityValue = cityInput.value;
+            fetchCityData(cityValue);
+        
+            // Save the entered city to local storage
+            saveCityToLocalStorage(cityValue);
+        });
+        function displaySavedCities() {
+            var savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
+        
+            var historyContainer = document.querySelector("#History");
+            historyContainer.innerHTML = "";
+        
+            savedCities.forEach(function (city) {
+                var cityButton = document.createElement("button");
+                cityButton.textContent = city;
+                cityButton.classList.add("btn", "btn-primary", "mb-2");
+        
+                // Add an event listener to the city button to fetch weather data when clicked
+                cityButton.addEventListener("click", function () {
+                    fetchCityData(city);
+                });
+        
+                historyContainer.appendChild(cityButton);
+            });
+        }
+        
+        // display saved cities when the page loads
+        displaySavedCities();
     });
 }
