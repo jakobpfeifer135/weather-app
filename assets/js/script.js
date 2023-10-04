@@ -13,6 +13,7 @@ searchBar.addEventListener("submit", function (event) {
 });
 
 function fetchCityData(city) {
+    forecast.innerHTML = "";
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     city +
@@ -20,7 +21,7 @@ function fetchCityData(city) {
     APIKey +
     "&units=imperial";
   cityContainer.innerHTML = "";
-  forecast.innerHTML = "";
+ 
 
   // Add a date display to the cityContainer
   var currentDate = dayjs().format("MMMM DD, YYYY");
