@@ -40,6 +40,7 @@ h1.navbar-brand {
 /* Search input styles */
 #search-btn {
     text-align: center;
+    
 }
 
 .input-group {
@@ -93,6 +94,31 @@ h1.navbar-brand {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#cityContainer {
+    background-color: skyblue;
+    text-align: center;
+   padding-top: 45px;
+}
+
+#search-form {
+    text-align: center;
+    
+}
+
+#city-input {
+    width: 500px;
+    padding: 10px;
+    border-radius: 7px;
+    margin: 20px;
+}
+
+#searchButton {
+    padding: 10px;
+    border-radius: 7px;
+}
+
+
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
