@@ -1,17 +1,18 @@
+//all global variables
 var APIKey = "f30dc0b71f772a037a522282770190be";
 var searchBar = document.querySelector("#search-form");
 var cityInput = document.querySelector("#city-input");
 var cityContainer = document.querySelector("#cityContainer");
 var forecast = document.querySelector("#forecast");
 var today = dayjs().format("MMMM DD, YYYY");
-
+//listens for clicks or enters on the search bar element
 searchBar.addEventListener("submit", function (event) {
   event.preventDefault();
-
+//pulls the users input and sets it as a usable variable
   var cityValue = cityInput.value;
   fetchCityData(cityValue);
 });
-
+//fetching the data from the city input value as in which city was asked for
 function fetchCityData(city) {
     forecast.innerHTML = "";
   var queryURL =
@@ -23,12 +24,12 @@ function fetchCityData(city) {
   cityContainer.innerHTML = "";
  
 
-  // Add a date display to the cityContainer
+  // Adding a date display to the cityContainer
   var currentDate = dayjs().format("MMMM DD, YYYY");
   var dateDisplay = document.createElement("p");
   dateDisplay.textContent = "Current Date: " + currentDate;
   cityContainer.append(dateDisplay);
-
+// a list of variables fetching each key piece of data such as temp and so forth
   fetch(queryURL)
     .then(function (response) {
       return response.json();
@@ -45,7 +46,7 @@ function fetchCityData(city) {
       var lon = data.coord.lon;
 
       nameOfCity.textContent = data.name;
-
+        //appending all of the data to the current date card
       cityContainer.append(nameOfCity);
       wind.textContent = "Wind speed: " + data.wind.speed + " MPH";
       cityContainer.append(wind);
@@ -56,7 +57,7 @@ function fetchCityData(city) {
       var cityIcon = document.createElement("img");
       cityIcon.setAttribute("src", icon);
       cityContainer.append(cityIcon);
-
+        //pulls the lat and lon from previous fetch to supply the real time data
       var fiveDayUrl =
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
         lat +
@@ -72,6 +73,7 @@ function fetchCityData(city) {
         })
         .then(function (forecastData) {
           console.log(forecastData);
+          //pulling the additional 5 days of data and adding to the page
           for (var i = 1; i < 6; i++) {
             var forecastCard = document.createElement("div");
             forecastCard.className = "card col-lg-2 m-2";
@@ -79,7 +81,7 @@ function fetchCityData(city) {
             var cardDate = document.createElement("h3");
             cardDate.textContent = dayjs().add(i, "days").format("MMMM DD, YYYY");
             forecastCard.append(cardDate);
-
+            // uses the icon png to add it to the page
             var cardIcon = document.createElement("img");
             var iconCode = forecastData.daily[i].weather[0].icon;
             cardIcon.setAttribute(
@@ -106,11 +108,13 @@ function fetchCityData(city) {
             forecast.append(forecastCard);
           }
         })
+        //throws a console error if a bad input occurs
         .catch(function (error) {
           console.log(
             "An error occurred while fetching weather data: " + error
           );
         });
+        //start of local storage coding
         function saveCityToLocalStorage(city) {
             // Get the current list of saved cities from local storage
             var savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
